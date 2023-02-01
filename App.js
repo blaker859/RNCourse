@@ -8,6 +8,8 @@ import {
   ProgressViewIOSComponent,
 } from "react-native";
 
+import { StatusBar } from "expo-status-bar";
+
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -76,77 +78,80 @@ export default function App() {
 
   // scrolling is not default
   return (
-    <View style={styles.appContainer}>
-      {/* if you want to style your own button you must build your own button */}
-      <Button
-        title="Add New Goal"
-        color="#5e0acc"
-        onPress={startAddGoalHandler}
-      />
-      {modalIsVisible && (
-        // using built in Props from modal naming it visible and checking modalIsVisible state from above
-        <GoalInput
-          visible={modalIsVisible}
-          onAddGoal={addGoalHandler}
-          onCancel={endAddGoalHandler}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        {/* if you want to style your own button you must build your own button */}
+        <Button
+          title="Add New Goal"
+          color="#a065ec"
+          onPress={startAddGoalHandler}
         />
-      )}
+        {modalIsVisible && (
+          // using built in Props from modal naming it visible and checking modalIsVisible state from above
+          <GoalInput
+            visible={modalIsVisible}
+            onAddGoal={addGoalHandler}
+            onCancel={endAddGoalHandler}
+          />
+        )}
 
-      {/* exporting functionality to GoalInput.js */}
+        {/* exporting functionality to GoalInput.js */}
 
-      {/* <View style={styles.inputContainer}>
+        {/* <View style={styles.inputContainer}>
         <TextInput
-          style={styles.textInput}
-          placeholder="Your Course Goal!"
-          // if you put () then it will be executed right away when loaded
-          onChangeText={goalInputHandler}
+        style={styles.textInput}
+        placeholder="Your Course Goal!"
+        // if you put () then it will be executed right away when loaded
+        onChangeText={goalInputHandler}
         />
         <Button title="Add Goal" onPress={addGoalHandler} />
         {/* buttons do not have onClick */}
-      {/* buttons do not have a style prop you */}
-      {/* </View> */}
+        {/* buttons do not have a style prop you */}
+        {/* </View> */}
 
-      {/* creating a new view to hold the scrollview, to format the flex property*/}
-      <View style={styles.goalsContainer}>
-        {/* makes content scrollable */}
-        {/* alwaysBounceVertical set to false makes the content only bounce once there is enough content overflow */}
-        {/* ScrollView will always render all of its elements so if there is a large list this will cause performance issues */}
+        {/* creating a new view to hold the scrollview, to format the flex property*/}
+        <View style={styles.goalsContainer}>
+          {/* makes content scrollable */}
+          {/* alwaysBounceVertical set to false makes the content only bounce once there is enough content overflow */}
+          {/* ScrollView will always render all of its elements so if there is a large list this will cause performance issues */}
 
-        {/* <ScrollView alwaysBounceVertical={false}>
+          {/* <ScrollView alwaysBounceVertical={false}>
           {courseGoals.map((goal) => (
             // must add a view to round the corners of the container on iPhone
             //should add key prop when outputting items of a list
             <View key={goal} style={styles.goalItem}>
-              <Text style={styles.goalText}>{goal}</Text>
+            <Text style={styles.goalText}>{goal}</Text>
             </View>
-          ))}
-        </ScrollView> */}
+            ))}
+          </ScrollView> */}
 
-        {/* Flatlist will only render items as needed with a small threshhold */}
-        {/* Calls renderItem function whenever it determines new items will need to be rendered */}
-        {/* ideally a list of objects */}
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => {
-            // passing data back from GoalItem
-            return (
-              <GoalItem
-                text={itemData.item.text}
-                // setting item id so we can find it with the delete function
-                //also binding data from goalitem.js
-                id={itemData.item.id}
-                onDeleteItem={deleteGoalHandler}
-              />
-            );
-          }}
-          // keyExtractor called to get a key out of every item: "API reference above"
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-          alwaysBounceVertical={false}
-        />
+          {/* Flatlist will only render items as needed with a small threshhold */}
+          {/* Calls renderItem function whenever it determines new items will need to be rendered */}
+          {/* ideally a list of objects */}
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => {
+              // passing data back from GoalItem
+              return (
+                <GoalItem
+                  text={itemData.item.text}
+                  // setting item id so we can find it with the delete function
+                  //also binding data from goalitem.js
+                  id={itemData.item.id}
+                  onDeleteItem={deleteGoalHandler}
+                />
+              );
+            }}
+            // keyExtractor called to get a key out of every item: "API reference above"
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+            alwaysBounceVertical={false}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -156,6 +161,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
     flex: 1,
+    backgroundColor: "#1e085a",
   },
   goalsContainer: {
     flex: 5,
