@@ -1,21 +1,25 @@
 // importing state management from React
 import { useState } from "react";
 
-import { StyleSheet, View, Button, TextInput, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
 import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
   // standard syntax for using state
   // setting the enteredGoalText "state" with the setEnteredGoalText function
-  const [enteredGoalText, setEnteredGoalText] = useState("");
+  // now needed in the GoalInput Component
+  // const [enteredGoalText, setEnteredGoalText] = useState("");
 
   //initialized with an empty array because we will want an array of goals later
   const [courseGoals, setCourseGoals] = useState([]);
 
-  function goalInputHandler(enteredText) {
-    setEnteredGoalText(enteredText);
-  }
+  // exporting functionality to GoalInput.js
+  // function goalInputHandler(enteredText) {
+  //   setEnteredGoalText(enteredText);
+  // }
+
   // function for ScrollView List
   // function addGoalHandler() {
   //   // listing all existing course goals and then appending the newly enteredGoalText
@@ -37,7 +41,7 @@ export default function App() {
   // }
 
   // if we are taking data from an API and the "key" is set to a different name
-  function addGoalHandler() {
+  function addGoalHandler(enteredGoalText) {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
@@ -47,18 +51,22 @@ export default function App() {
   // scrolling is not default
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
+      <GoalInput onAddGoal={addGoalHandler} />
+
+      {/* exporting functionality to GoalInput.js */}
+
+      {/* <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
           placeholder="Your Course Goal!"
           // if you put () then it will be executed right away when loaded
           onChangeText={goalInputHandler}
         />
-
         <Button title="Add Goal" onPress={addGoalHandler} />
         {/* buttons do not have onClick */}
-        {/* buttons do not have a style prop you */}
-      </View>
+      {/* buttons do not have a style prop you */}
+      {/* </View> */}
+
       {/* creating a new view to hold the scrollview, to format the flex property*/}
       <View style={styles.goalsContainer}>
         {/* makes content scrollable */}
@@ -101,22 +109,6 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
     flex: 1,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center", //to center the text on the button instead of stretch
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#000",
-    flex: 1,
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#CCCCCC",
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
   },
   goalsContainer: {
     flex: 5,
