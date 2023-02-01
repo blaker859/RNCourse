@@ -48,6 +48,11 @@ export default function App() {
     ]);
   }
 
+  // creating a delete goal function
+  function deleteGoalHandler() {
+    console.log("Delete");
+  }
+
   // scrolling is not default
   return (
     <View style={styles.appContainer}>
@@ -90,7 +95,12 @@ export default function App() {
           data={courseGoals}
           renderItem={(itemData) => {
             // passing data back from GoalItem
-            return <GoalItem text={itemData.item.text} />;
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                onDeleteItem={deleteGoalHandler}
+              />
+            );
           }}
           // keyExtractor called to get a key out of every item: "API reference above"
           keyExtractor={(item, index) => {
