@@ -1,14 +1,9 @@
 // importing state management from React
 import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from "react-native";
+
+import { StyleSheet, View, Button, TextInput, FlatList } from "react-native";
+
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   // standard syntax for using state
@@ -86,13 +81,10 @@ export default function App() {
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
-            return (
-              <View style={styles.goalItem}>
-                <Text style={styles.goalText}>{itemData.item.text}</Text>
-              </View>
-            );
+            // passing data back from GoalItem
+            return <GoalItem text={itemData.item.text} />;
           }}
-          // called to get a key out of every item: "API reference above"
+          // keyExtractor called to get a key out of every item: "API reference above"
           keyExtractor={(item, index) => {
             return item.id;
           }}
@@ -128,16 +120,5 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
-  },
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    // will not round corners in text on iPhones without creating a view
-    borderRadius: 6,
-    backgroundColor: "#5e0acc",
-    // color: "white",
-  },
-  goalText: {
-    color: "white",
   },
 });
