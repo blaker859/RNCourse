@@ -1,9 +1,16 @@
 // importing state management from React
 import { useState } from "react";
-import { StyleSheet, View, FlatList, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Button,
+  ProgressViewIOSComponent,
+} from "react-native";
 
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
+import { PropertyBinding } from "three";
 
 export default function App() {
   // standard syntax for using state
@@ -18,6 +25,10 @@ export default function App() {
 
   function startAddGoalHandler() {
     setModalIsVisible(true);
+  }
+
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
   }
 
   // exporting functionality to GoalInput.js
@@ -51,6 +62,7 @@ export default function App() {
       ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
+    endAddGoalHandler();
   }
 
   // creating a delete goal function
@@ -74,7 +86,11 @@ export default function App() {
       />
       {modalIsVisible && (
         // using built in Props from modal naming it visible and checking modalIsVisible state from above
-        <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />
+        <GoalInput
+          visible={modalIsVisible}
+          onAddGoal={addGoalHandler}
+          onCancel={endAddGoalHandler}
+        />
       )}
 
       {/* exporting functionality to GoalInput.js */}
