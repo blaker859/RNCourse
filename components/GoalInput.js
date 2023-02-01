@@ -17,21 +17,23 @@ function GoalInput(props) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Your Course Goal!"
-        // if you put () then it will be executed right away when loaded
-        onChangeText={goalInputHandler}
-        // binding the value to the empty "enteredGoalText"
-        // completing two way binding
-        value={enteredGoalText}
-      />
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your Course Goal!"
+          // if you put () then it will be executed right away when loaded
+          onChangeText={goalInputHandler}
+          // binding the value to the empty "enteredGoalText"
+          // completing two way binding
+          value={enteredGoalText}
+        />
 
-      <Button title="Add Goal" onPress={addGoalHandler} />
-      {/* buttons do not have onClick */}
-      {/* buttons do not have a style prop you */}
-    </View>
+        <Button title="Add Goal" onPress={addGoalHandler} />
+        {/* buttons do not have onClick */}
+        {/* buttons do not have a style prop you */}
+      </View>
+    </Modal>
   );
 }
 export default GoalInput;

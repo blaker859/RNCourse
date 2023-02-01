@@ -1,7 +1,6 @@
 // importing state management from React
 import { useState } from "react";
-
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Button } from "react-native";
 
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
@@ -14,6 +13,12 @@ export default function App() {
 
   //initialized with an empty array because we will want an array of goals later
   const [courseGoals, setCourseGoals] = useState([]);
+
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+
+  function startAddGoalHandler() {
+    setModalIsVisible(true);
+  }
 
   // exporting functionality to GoalInput.js
   // function goalInputHandler(enteredText) {
@@ -61,7 +66,16 @@ export default function App() {
   // scrolling is not default
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      {/* if you want to style your own button you must build your own button */}
+      <Button
+        title="Add New Goal"
+        color="#5e0acc"
+        onPress={startAddGoalHandler}
+      />
+      {modalIsVisible && (
+        // using built in Props from modal naming it visible and checking modalIsVisible state from above
+        <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />
+      )}
 
       {/* exporting functionality to GoalInput.js */}
 
