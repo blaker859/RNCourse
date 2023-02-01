@@ -28,8 +28,15 @@ function GoalInput(props) {
           // completing two way binding
           value={enteredGoalText}
         />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Add Goal" onPress={addGoalHandler} />
+          </View>
 
-        <Button title="Add Goal" onPress={addGoalHandler} />
+          <View style={styles.button}>
+            <Button title="Cancel" />
+          </View>
+        </View>
         {/* buttons do not have onClick */}
         {/* buttons do not have a style prop you */}
       </View>
@@ -40,19 +47,27 @@ export default GoalInput;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flex: 1,
+    padding: 16,
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center", //to center the text on the button instead of stretch
     marginBottom: 24,
     borderBottomWidth: 1,
     borderBottomColor: "#000",
-    flex: 1,
   },
   textInput: {
     borderWidth: 1,
     borderColor: "#CCCCCC",
-    width: "70%",
-    marginRight: 8,
+    width: "100%",
     padding: 8,
+  },
+  buttonContainer: {
+    marginTop: 16,
+    flexDirection: "row",
+  },
+  button: {
+    width: 100,
+    marginHorizontal: 8,
   },
 });
