@@ -10,7 +10,6 @@ import {
 
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
-import { PropertyBinding } from "three";
 
 export default function App() {
   // standard syntax for using state
