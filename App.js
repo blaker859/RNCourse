@@ -49,8 +49,13 @@ export default function App() {
   }
 
   // creating a delete goal function
-  function deleteGoalHandler() {
-    console.log("Delete");
+  // receiving the id of the item to be deleted
+  function deleteGoalHandler(id) {
+    setCourseGoals((currentCourseGoals) => {
+      return currentCourseGoals.filter((goal) => {
+        goal.id !== id;
+      });
+    });
   }
 
   // scrolling is not default
@@ -98,6 +103,9 @@ export default function App() {
             return (
               <GoalItem
                 text={itemData.item.text}
+                // setting item id so we can find it with the delete function
+                //also binding data from goalitem.js
+                id={itemData.item.id}
                 onDeleteItem={deleteGoalHandler}
               />
             );

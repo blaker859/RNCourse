@@ -6,7 +6,8 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 function GoalItem(props) {
   return (
     // importing functionality from the props and calling the function made in app.js
-    <Pressable onPress={props.onDeleteItem}>
+    // bind() is a way to preconfigure a function for future execution
+    <Pressable onPress={props.onDeleteItem.bind(this, props.id)}>
       <View style={styles.goalItem}>
         <Text style={styles.goalText}>{props.text}</Text>
       </View>
